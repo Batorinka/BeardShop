@@ -1,8 +1,24 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<BeardShop.Models.Product>
+@{
+    ViewData["Title"] = "Список товаров";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h3>Товары</h3>
+<table>
+    <tr>
+        <td>Код</td>
+        <td>Название</td>
+        <td>Цена</td>
+        <td>Категория</td>
+    </tr>
+    @foreach (var product in Model)
+    {
+        <tr>
+            <td>@product.Code</td>
+            <td>@product.Name</td>
+            <td>@product.Price</td>
+            <td>@product.Category</td>
+            <td><a href="~/Home/Buy/@product.Id">Купить</a></td>
+        </tr>
+    }
+</table>    
