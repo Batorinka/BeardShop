@@ -32,6 +32,7 @@ namespace BeardShop
                     logger.LogError(ex, "An error occured seeding the DB.");
                 }
             }
+            host.Run();
 
         }
 
