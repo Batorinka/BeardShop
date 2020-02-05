@@ -12,15 +12,16 @@ namespace BeardShop.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        AppDbContext db;
+        public HomeController(ILogger<HomeController> logger, AppDbContext context)
         {
             _logger = logger;
+            db = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(db.Products.ToList());
         }
 
         public IActionResult Privacy()
