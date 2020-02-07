@@ -11,7 +11,7 @@ namespace BeardShop.Models
         public int CustomerId { get; set; } // NotNull
         public DateTime OrderDate { get; set; } // NotNull
         public DateTime ShipmentDate { get; set; }
-        public int OrderNumber { get; set; }
+        public int? OrderNumber { get; set; }
         public string Status { get; set; }
         public Customer Customer { get; set; }
     }
