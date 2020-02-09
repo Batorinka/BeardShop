@@ -34,5 +34,20 @@ namespace BeardShop.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        [HttpGet]
+        public IActionResult Buy(int? id)
+        {
+            if (id == null) return RedirectToAction("Index");
+            ViewBag.ProductId = id;
+            return View();
+        }
+        [HttpPost]
+        public string Buy(OrderItem orderItem)
+        {
+            db.OrderItems.Add(orderItem);
+            // save changes to db
+            db.SaveChanges();
+            return "Спасибо, ";
+        }
     }
 }
