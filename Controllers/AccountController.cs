@@ -58,7 +58,13 @@ namespace BeardShop.Controllers
                 User user = await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
                 if (user == null)
                 {
-                    db.Users.Add(new User { Email = model.Email, Password = model.Password, Name = model.Name, Code = GetCode() });
+                    db.Users.Add(new User { 
+                        Email = model.Email, 
+                        Password = model.Password, 
+                        Name = model.Name, 
+                        Code = GetCode(), 
+                        Role = 2 
+                    });
                     await db.SaveChangesAsync();
                     await Authenticate(model.Email);
                     return RedirectToAction("Index", "Home");
