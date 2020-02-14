@@ -50,29 +50,38 @@ namespace BeardShop
                     }
                 );
             }
-            if (!context.Customers.Any())
+            if (!context.Users.Any())
             {
-                context.Customers.AddRange(
-                    new Customer
+                context.Users.AddRange(
+                    new User
                     {
                         Name = "Admin",
+                        Email = "admin@beardshop.com",
+                        Password = "123",
+                        Role = 1,
                         Code = "0401-2020"
                     },
-                    new Customer
+                    new User
                     {
                         Name = "Kirill",
+                        Email = "kirill@beardshop.com",
+                        Password = "123",
+                        Role = 2,
                         Code = "1001-2020",
                         Address = "Stupino",
                         Discount = 10
                     },
-                    new Customer
+                    new User
                     {
                         Name = "Kostya",
+                        Email = "kostya@beardshop.com",
+                        Password = "123",
+                        Role = 2,
                         Code = "1001-2020",
                         Address = "Kolomna",
                         Discount = 0
                     }
-                );
+                ) ;
                 context.SaveChanges();
             }
         }
