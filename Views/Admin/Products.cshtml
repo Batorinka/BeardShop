@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewData["Title"] = "Products";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div id="appAdmin">
+    <products-component></products-component>
+</div>
+
+@section scripts {
+    <script src="@Url.Content("~/bundle/admin.js")"></script>
+}
+

@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewData["Title"] = "Users";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div id="appAdmin">
+    <users-component></users-component>
+</div>
+
+@section scripts {
+    <script src="@Url.Content("~/bundle/admin.js")"></script>
+}
+
