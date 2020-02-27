@@ -17,7 +17,8 @@ namespace BeardShop.Models
         public string Password { get; set; } // NotNull
         [Required]
         public string Code { get; set; } // NotNull «ХХХХ-ГГГГ» где Х – число, ГГГГ – год в котором зарегистрирован заказчик
-        public int Role { get; set; } // 1 - Admin, 2 - Customer
+        public int? RoleId { get; set; } // 1 - Admin, 2 - Customer
+        public Role Role { get; set; }
         public string Address { get; set; }
         public int? Discount { get; set; }
     }
