@@ -58,7 +58,7 @@ namespace BeardShop
                         Name = "Admin",
                         Email = "admin@beardshop.com",
                         Password = "123",
-                        Role = 1,
+                        RoleId = 1,
                         Code = "0401-2020"
                     },
                     new User
@@ -66,7 +66,7 @@ namespace BeardShop
                         Name = "Kirill",
                         Email = "kirill@beardshop.com",
                         Password = "123",
-                        Role = 2,
+                        RoleId = 2,
                         Code = "1001-2020",
                         Address = "Stupino",
                         Discount = 10
@@ -76,7 +76,7 @@ namespace BeardShop
                         Name = "Kostya",
                         Email = "kostya@beardshop.com",
                         Password = "123",
-                        Role = 2,
+                        RoleId = 2,
                         Code = "1001-2020",
                         Address = "Kolomna",
                         Discount = 0

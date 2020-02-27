@@ -2,12 +2,14 @@
 import HomeComponent from './home.vue'
 import ContactComponent from './contactus.vue'
 import AboutComponent from './aboutus.vue'
+import ModalComponent from './modal.vue'
 
 new Vue({
     el: "#app",
     components: {
         HomeComponent,
         ContactComponent,
-        AboutComponent
+        AboutComponent,
+        ModalComponent
     }
 })
