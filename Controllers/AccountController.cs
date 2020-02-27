@@ -32,10 +32,17 @@ namespace BeardShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == model.Password);
+                User user = await db.Users
+                    .Include(u => u.Role)
+                    .FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == model.Password);
                 if (user != null)
                 {
-                    await Authenticate(model.Email);
+                    if (user.Role.Name == "admin")
+                    {
+                        await Authenticate(user);
+                        return RedirectToAction("Orders", "Admin");
+                    }
+                    await Authenticate(user);
                     return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
@@ -58,15 +65,23 @@ namespace BeardShop.Controllers
                 User user = await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
                 if (user == null)
                 {
-                    db.Users.Add(new User { 
+                    user = new User { 
                         Email = model.Email, 
                         Password = model.Password, 
                         Name = model.Name, 
-                        Code = GetCode(), 
-                        Role = 2 
-                    });
+                        Code = GetCode() 
+                    };
+
+                    Role userRole = await db.Roles.FirstOrDefaultAsync(r => r.Name == "customer");
+
+                    if (userRole != null)
+                    {
+                        user.Role = userRole;
+                    }
+
+                    db.Users.Add(user);
                     await db.SaveChangesAsync();
-                    await Authenticate(model.Email);
+                    await Authenticate(user);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -77,11 +92,12 @@ namespace BeardShop.Controllers
             return View(model);
         }
 
-        private async Task Authenticate(string userName)
+        private async Task Authenticate(User user)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role?.Name)
             };
             ClaimsIdentity id = new ClaimsIdentity(
                 claims,
