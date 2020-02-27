@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BeardShop.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BeardShop.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        AppDbContext db;
+        private AppDbContext db;
         public HomeController(ILogger<HomeController> logger, AppDbContext context)
         {
             _logger = logger;
@@ -21,14 +22,14 @@ namespace BeardShop.Controllers
 
         public IActionResult Index()
         {
-            return View(db.Products.ToList());
+            return View();
         }
 
         public IActionResult Privacy()
         {
             return View();
         }
-
+        [Authorize]
         public IActionResult About()
         {
             return View();
